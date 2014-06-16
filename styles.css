@@ -1,0 +1,13 @@
+/* Styles */
+
+/* Style for button */
+#btnAdd {
+    width: 100px;
+    height : 20px;
+}
+
+/* Not working */
+#holder {
+    border: hidden;
+    margin: auto;
+}
