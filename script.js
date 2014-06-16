@@ -3,20 +3,14 @@
  */
 
 
-$(document).ready(function() {
-    //alert("working");
-    createUList(); // Need to call only once. 
-    /*$('button').click(function() {
-        $textValue = $('#textBox').val();
-        addListItem($textValue);       
-    });*/
-    $('button').on('click',function() {
-        $textValue = $('#textBox').val();
-        addListItem($textValue);        
-        
-    }); 
-});
 
+$(document).ready(function () {
+    createUList(); // Need to call only once. 
+    $('button').on('click', function() {
+        var $textValue = $('#textBox').val();
+        addListItem($textValue);
+    });
+});
 
 
 
@@ -30,8 +24,7 @@ function createUList() {
 
 
 // Function to add list item and button to the <div> id = list 
-function addListItem($text) {
-   
+function addListItem($text) {   
     $listValue = "<li>" + $text + "</li>";
     //$("#list").append($listValue); // Add list item to the unordered list    
     ($listValue).insertAfter("#list");
