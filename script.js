@@ -13,26 +13,38 @@ $(document).ready(function () {
         var $textValue = $('#textBox').val();
         addListItem($textValue);
     });
+    
 });
-
-
 
 
 // Function to create an Unordered List. Call this only once
 function createUList() {
-    $ulList = "<ul id='list'></ul>";
+    var $ulList = "<ul id='list'></ul>";
     $("#dynamicList").append($ulList);
 }
 
 
 // Function to add list item and button to the <div> id = list 
 function addListItem($text) {       
-    $buttonWithID = $buttonText + Math.random(0,Math.random(1,1000000)).toFixed(5);
+    var $textBox = $("#textBox"); // To clear the textbox
+    var $buttonWithID = $buttonText + Math.random(0,Math.random(1,1000000)).toFixed(5);
     $buttons.push($buttonWithID); // We need this later to identify the button clicked
-    $button = "<input type='button' id='" + $buttonWithID +"' value='Delete' >";
-    $listValue = "<li>" + $text + " " + $button + "</li>";
-    $("#list").append($listValue); // Add list item to the unordered list   
-    
+    var $button = "<input type='button' id='" + $buttonWithID +"' value='Delete' >";
+    var $listItem = "<li>" + $text + " " + $button + "</li>";
+    $("#list").append($listItem); // Add list item to the unordered list  
+    $textBox.val(" ");    
 }
+
+
+
+// Function to delete list item 
+function deleteListItem($buttonId) {
+    var $buttonWithId = "#" + $buttonId; // To make it useful for identify
+    $($buttonWithId).on('click',function () {
+        $(this).remove('li');
+    });
+}
+
+
 
 
