@@ -9,12 +9,13 @@ var $buttons = []; // To store the dynamically created buttons
 
 $(document).ready(function () {
     createUList(); // Need to call only once. 
-    $('button').on('click', function() {
+    $('#btnAdd').on('click', function() {
         var $textValue = $('#textBox').val();
         addListItem($textValue);
     });
-    
 });
+    
+
 
 
 // Function to create an Unordered List. Call this only once
@@ -32,18 +33,20 @@ function addListItem($text) {
     var $button = "<input type='button' id='" + $buttonWithID +"' value='Delete' >";
     var $listItem = "<li>" + $text + " " + $button + "</li>";
     $("#list").append($listItem); // Add list item to the unordered list  
-    $textBox.val(" ");    
+    $textBox.val(" ");
 }
 
 
 
+/*
 // Function to delete list item 
-function deleteListItem($buttonId) {
-    var $buttonWithId = "#" + $buttonId; // To make it useful for identify
-    $($buttonWithId).on('click',function () {
+function deleteListItem() {
+    var $btnID = "#" + $buttonId; // To make it useful for identify
+    $($btnID).on('click',function () {
+        alert("del");
         $(this).remove('li');
     });
-}
+} */
 
 
 
