@@ -3,23 +3,18 @@
  */
 
 var $count = 0; // For counting the number of lists
-var $buttonText = "btnList"; // Fixed string button created dynamically. Random number will be appended to get different IDs
-var $idText = "item"; // Fixed string list item created dynamically. Random number will be appended to get different list IDs 
-var $buttons = []; // To store the dynamically created buttons
-// To store each and every 'list id' corresponding to the 'button id'. To identify the button under a list item
-var $listID = [];
-var $buttonID = [];
-
-
 
 
 $(document).ready(function () {
     createUList(); // Need to call only once.
-    attachEvents(); // If commented click event on button created dynamically will not work. Not sure of this bug
-    $("#dynamicList").unbind('click');
     $('#btnAdd').on('click', function() {        
         var $textValue = $('#textBox').val();
+        if( $.trim($textValue).length == 0 ){ // textbox should not be empty 
+            alert("Input a string ... ");
+        }
+        else {
         addListItem($textValue);
+        }
     });
 });
     
@@ -34,46 +29,25 @@ function createUList() {
 
 
 // Function to add list item and button to the <div> id = list 
-function addListItem($text) {       
-    var $textBox = $("#textBox"); // To clear the textbox
-    $textBox.val(" ");
-    var $buttonWithID = $buttonText + Math.random(0,Math.random(1,1000000)).toFixed(5); // Generate a random ID to append with the 'button' text
-    $buttons.push('#'+$buttonWithID); // We need this later to identify the button clicked
-    var $button = "<input type='button' id='" + $buttonWithID +"' value='Delete' >";
-    var $idWithID = $idText + Math.random(0,Math.random(1,1000000)).toFixed(5); // Generate a random ID to append with the 'list' text
-    var $listItem = "<li id='" + $idWithID + "'>" + $text + " " + $button + "</li>"; 
-    $("#list").append($listItem); // Add list item with button to the unordered list      
-    $listID.push('#' + $idWithID);
-    $buttonID.push('#' + $buttonWithID);
-    attachEvents('#' + $buttonWithID, '#' + $idWithID);
+function addListItem($text) {    
+    
+    var $listItem = "<li>" + $text + "<button>Delete</button> </li>";
+    $("#list").append($listItem); // Add list item with button to the unordered list
+    $("#list").append("<p>"+ (++$count) + " item(s) in the list </p>"); // Append 'status' at the end of the list
+    $("#textBox").val(" ");  // Clear the textbox
+    attachEvents();
 }
 
 
 
-// Attach 'click' even to each button generated 
-function attachEvents($btn,$id) {
-    
-    $("#dynamicList").on('click',$btn,function() {
-        $($id).remove();
+// Attach 'click' even to each button generated and delete the corresponding list item
+function attachEvents() {    
+    $('ul').on('click','button',function () {
+        $(this).closest('li').remove();
     });
-    //alert($.data(object,'events'));
-    
-   /* for(var $i = 0; $i < $buttonID.length ; $i++) {
-        $b = $buttonID[i];
-        $("#dynamicList").on('click',$buttonID[i],deleteListItem);
-    }*/
-    
-    //$b = $btn;
-         //$("#dynamicList").on('click',$btn,deleteListItem);
 }
 
 
-/*
-// Delete list item 
-function deleteListItem() {
-    alert($b);
-    //$('#dynamicList').unbind('click');
-} */
 
 
 
