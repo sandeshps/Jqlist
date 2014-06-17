@@ -2,7 +2,7 @@
  * Created by sandesh on 6/16/2014.
  */
 
-var $count = 0; // For counting the number of lists
+var $count = 0; // Hold the count of lists created/deleted
 
 
 $(document).ready(function () {
@@ -29,12 +29,12 @@ function createUList() {
 
 
 // Function to add list item and button to the <div> id = list 
-function addListItem($text) {    
-    
+function addListItem($text) {
+    removeParagraph(); // Remove the paragraph
+    $("#textBox").val(" ");  // Clear the textbox
     var $listItem = "<li>" + $text + "<button>Delete</button> </li>";
     $("#list").append($listItem); // Add list item with button to the unordered list
-    $("#list").append("<p>"+ (++$count) + " item(s) in the list </p>"); // Append 'status' at the end of the list
-    $("#textBox").val(" ");  // Clear the textbox
+    $("<p>"+ (++$count) + " item(s) in the list </p>").insertAfter("#list"); // Append 'status' at the end of the list    
     attachEvents();
 }
 
@@ -43,8 +43,21 @@ function addListItem($text) {
 // Attach 'click' even to each button generated and delete the corresponding list item
 function attachEvents() {    
     $('ul').on('click','button',function () {
-        $(this).closest('li').remove();
+        $(this).closest('li').remove();    
+        --$count;
+        removeParagraph(); // Remove the paragraph again for updating new status
+        updateStatus();
     });
+}
+
+// Removes the paragraph used to display the status
+function removeParagraph() {
+    $("p").remove();
+}
+
+// Display status
+function updateStatus() {
+        $("<p>"+ $count + " item(s) in the list </p>").insertAfter("#list");
 }
 
 
