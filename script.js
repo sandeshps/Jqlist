@@ -16,6 +16,7 @@ var $buttonID = [];
 $(document).ready(function () {
     createUList(); // Need to call only once.
     attachEvents(); // If commented click event on button created dynamically will not work. Not sure of this bug
+    $("#dynamicList").unbind('click');
     $('#btnAdd').on('click', function() {        
         var $textValue = $('#textBox').val();
         addListItem($textValue);
@@ -44,27 +45,35 @@ function addListItem($text) {
     $("#list").append($listItem); // Add list item with button to the unordered list      
     $listID.push('#' + $idWithID);
     $buttonID.push('#' + $buttonWithID);
-    attachEvents('#' + $buttonWithID);
+    attachEvents('#' + $buttonWithID, '#' + $idWithID);
 }
 
 
 
 // Attach 'click' even to each button generated 
-function attachEvents($btn) {
+function attachEvents($btn,$id) {
+    
+    $("#dynamicList").on('click',$btn,function() {
+        $($id).remove();
+    });
     //alert($.data(object,'events'));
-    for(var $i=0; i < $buttonID.length ; i++) {
+    
+   /* for(var $i = 0; $i < $buttonID.length ; $i++) {
+        $b = $buttonID[i];
         $("#dynamicList").on('click',$buttonID[i],deleteListItem);
-    }
-         
+    }*/
+    
+    //$b = $btn;
+         //$("#dynamicList").on('click',$btn,deleteListItem);
 }
 
 
-
+/*
 // Delete list item 
 function deleteListItem() {
     alert($b);
     //$('#dynamicList').unbind('click');
-} 
+} */
 
 
 
