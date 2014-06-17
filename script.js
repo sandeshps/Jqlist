@@ -48,7 +48,7 @@ function attachEvents($btn) {
     $("#dynamicList").on('click','button',deleteListItem);
     //alert($btn);
     //$("#dynamicList #list li").on('click',$btn,deleteListItem);
-    
+     
     
 }
 
