@@ -12,7 +12,7 @@ var $buttons = []; // To store the dynamically created buttons
 
 $(document).ready(function () {
     createUList(); // Need to call only once.
-    attachEvents(); // If commented click event on button created dynamically will work. Not sure of this bug
+    attachEvents(); // If commented click event on button created dynamically will not work. Not sure of this bug
     $('#btnAdd').on('click', function() {        
         var $textValue = $('#textBox').val();
         addListItem($textValue);
